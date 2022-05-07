@@ -5,8 +5,7 @@ import (
 	"testing"
 )
 
-// Test time to float convert
-
+// Time to float convert test
 func TestTimeToFloat(t *testing.T) {
 
 	var times = []string{

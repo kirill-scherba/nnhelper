@@ -8,7 +8,6 @@ import (
 	"os"
 	"time"
 
-	"github.com/fxsjy/gonn/gonn"
 	"github.com/kirill-scherba/nnhelper"
 )
 
@@ -30,39 +29,37 @@ func main() {
 	// Create NN if it file does not exists
 	if _, err := os.Stat(SAM02_NN); errors.Is(err, os.ErrNotExist) {
 		log.Println("Create", SAM02_NN, "neural network")
-		nnhelper.CreateNN(1, 64, 4, false, SAM02_INP, SAM02_TAR, SAM02_NN, true)
+		nnhelper.Create(1, 64, 4, false, SAM02_INP, SAM02_TAR, SAM02_NN, true)
 	}
 
 	// Load neural network from file
-	// log.Println("Load", SAM02_NN, "neural network")
-	nn := gonn.LoadNN(SAM02_NN)
+	nn := nnhelper.Load(SAM02_NN)
 
-	// Input values:
+	// Check Input parameters:
 	// timeArray (00:00 - 23:59)
 	var timeArray []string
-	if *timeOfDay != "" {
+	switch {
+	case len(*timeOfDay) > 0:
 		timeArray = []string{*timeOfDay}
-	} else if *timeNow {
+	case *timeNow:
 		now := time.Now()
 		timeArray = []string{fmt.Sprintf("%d:%02d", now.Hour(), now.Minute())}
-	} else {
+	default:
 		timeArray = []string{"10:11", "15:23", "18:20", "1:45"}
 	}
 
-	// Get ansvers from NN (weight array)
-	// log.Println("Execute", SAM02_NN, "neural network")
+	// Get answers from NN (weight array)
 	for i := range timeArray {
 		t, _ := nnhelper.TimeToFloat(timeArray[i])
-		out := nn.Forward([]float64{t})
+		out := nn.Answer([]float64{t})
 
 		// Print answer
-		fmt.Printf("%s\t%s\t%v\n", timeArray[i], GetResult(out), out)
+		fmt.Printf("%s\t%s\t%v\n", timeArray[i], getResult(out), out)
 	}
-
-	// log.Println("All done")
 }
 
-func GetResult(output []float64) string {
+// getResult return human result from an output float array
+func getResult(output []float64) string {
 	max := -99999.0
 	pos := -1
 	// Get max weight position

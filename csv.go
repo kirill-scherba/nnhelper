@@ -3,7 +3,8 @@
 // license that can be found in the LICENSE file.
 
 // Neural Network Helper package.
-// This module Read CSV files and convert it to float format.
+// This module Read CSV files and convert its values from string to float.
+
 package nnhelper
 
 import (

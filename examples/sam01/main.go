@@ -6,7 +6,6 @@ import (
 	"log"
 	"os"
 
-	"github.com/fxsjy/gonn/gonn"
 	"github.com/kirill-scherba/nnhelper"
 )
 
@@ -35,16 +34,16 @@ const (
 // Examples:
 //
 // 	Health	Weapons	The enemies	Decision
-// 	50		one		one			Attack
-// 	90		one		2			Attack
-// 	80		0		one			Attack
-// 	thirty	one		one			Steal
-// 	60		one		2			Steal
-// 	40		0		one			Steal
-// 	90		one		7			Run away
-// 	60		one		four		Run away
-// 	ten		0		one			Run away
-// 	60		one		0			Nothing to do
+// 	50		1		1			Attack
+// 	90		1		2			Attack
+// 	80		0		1			Attack
+// 	30		1		1			Steal
+// 	60		1		2			Steal
+// 	40		0		1			Steal
+// 	90		1		7			Run away
+// 	60		1		4			Run away
+// 	10		0		1			Run away
+// 	60		1		0			Nothing to do
 // 	100		0		0			Nothing to do
 //
 
@@ -55,12 +54,11 @@ func main() {
 	// Create NN if it file does not exists
 	if _, err := os.Stat(SAM01_NN); errors.Is(err, os.ErrNotExist) {
 		log.Println("Create", SAM01_NN, "neural network")
-		nnhelper.CreateNN(3, 16, 4, false, SAM01_INP, SAM01_TAR, SAM01_NN, true)
+		nnhelper.Create(3, 16, 4, false, SAM01_INP, SAM01_TAR, SAM01_NN, true)
 	}
 
 	// Load neural network from file
-	// log.Println("Load", SAM01_NN, "neural network")
-	nn := gonn.LoadNN(SAM01_NN)
+	nn := nnhelper.Load(SAM01_NN)
 
 	// Input values:
 	// hp - heals (0.1 - 1.0)
@@ -70,17 +68,15 @@ func main() {
 	var weapon float64 = 1.0
 	var enemyCount float64 = 1.0
 
-	// Get ansver from NN (weight array)
-	// log.Println("Execute", SAM01_NN, "neural network")
-	out := nn.Forward([]float64{hp, weapon, enemyCount})
+	// Get answer from NN (weight array)
+	out := nn.Answer([]float64{hp, weapon, enemyCount})
 
 	// Print answer
-	fmt.Println(hp, weapon, enemyCount, GetResult(out), out)
-
-	// log.Println("All done")
+	fmt.Println(hp, weapon, enemyCount, getResult(out), out)
 }
 
-func GetResult(output []float64) string {
+// getResult return human result from an output float array
+func getResult(output []float64) string {
 	max := -99999.0
 	pos := -1
 	// Get max weight position
