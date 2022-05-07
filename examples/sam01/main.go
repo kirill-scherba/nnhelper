@@ -75,7 +75,7 @@ func main() {
 
 	// Get answer from NN (weight array)
 	out := nn.Answer(hp, weapon, enemyCount)
-	answer := nn.AnswerToHuman(out, humanAnswers)
+	answer,_ := nn.AnswerToHuman(out, humanAnswers)
 
 	// Print answer
 	fmt.Println(hp, weapon, enemyCount, answer, out)

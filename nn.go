@@ -71,16 +71,17 @@ func LoadFromString(nnstrig string) *NeuralNetwork {
 	return &NeuralNetwork{nn}
 }
 
-// Get answer from neural network (get weight array)
+// Get answer from neural network (get weight array), return output array
 func (nn *NeuralNetwork) Answer(in ...float64) (out []float64) {
 	return nn.Forward(in)
 }
 
-// AnswerToHuman translate nn answer to human answer
-func (nn *NeuralNetwork) AnswerToHuman(out []float64, human []string) string {
+// AnswerToHuman translate nn answer to human answer, return human string value
+// and index in output array
+func (nn *NeuralNetwork) AnswerToHuman(out []float64, human []string) (string, int) {
 	pos := MaxFloatPosition(out)
 	if pos >= 0 && pos < len(human) {
-		return human[pos]
+		return human[pos], pos
 	}
-	return ""
+	return "", pos
 }

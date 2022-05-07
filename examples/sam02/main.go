@@ -84,7 +84,7 @@ func main() {
 	for i := range timeArray {
 		t, _ := nnhelper.TimeToFloat(timeArray[i])
 		out := nn.Answer(t)
-		answer := nn.AnswerToHuman(out, humanAnswers)
+		answer, _ := nn.AnswerToHuman(out, humanAnswers)
 
 		// Print answer
 		fmt.Printf("%s\t%s\t%v\n", timeArray[i], answer, out)
