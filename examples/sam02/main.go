@@ -7,26 +7,26 @@
 // The task of this neural network is to decide what human time of day is
 // selected in input parameter:
 //
-// - time of day in 24hour time fromat: 11:30 or 22:30, etc.
+//  - time of day in 24hour time fromat: 11:30 or 22:30, etc.
 //
 // Depending on the outcome, one of the following decisions may be taken:
 //
-// - Night
-// - Morning
-// - Day
-// - Evening
+//  - Night
+//  - Morning
+//  - Day
+//  - Evening
 //
 // Examples for traning:
 //
-//  Time		Time of day
-// 00:00		Night
-//  6:59		Night
-//  7:00		Morning
-// 11:59		Morning
-// 12:00		Day
-// 17:59		Day
-// 18:00		Evening
-// 23:59		Evening
+//   Time		Time of day
+//  00:00		Night
+//   6:59		Night
+//   7:00		Morning
+//  11:59		Morning
+//  12:00		Day
+//  17:59		Day
+//  18:00		Evening
+//  23:59		Evening
 //
 package main
 
