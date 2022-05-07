@@ -5,6 +5,6 @@ Go Language Package with Neural Network helper functions:
 - Create Neural Network module using [gonn](https://github.com/fxsjy/gonn) package
 - Read CSV files and convert it to float format
 
-Look at samples in [exapmples](https://github.com/kirill-scherba/nnhelper/tree/main/examples) folder.
+Look samples at [exapmples](https://github.com/kirill-scherba/nnhelper/tree/main/examples) folder.
 
-https://go.dev/play/p/224QJ73H8nQ
+Or you can see example in [The Go Playground](https://go.dev/play/p/CuwLYJXZqBO).
