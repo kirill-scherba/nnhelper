@@ -35,6 +35,21 @@ func Create(inputCount, hiddenCount, outputCount int, regression bool,
 	gonn.DumpNN(resultNN, nn)
 }
 
+// MaxFloatPosition return positon of maximum weight value in float array,
+// or -1 if array is empty
+func MaxFloatPosition(in []float64) int {
+	var max float64
+	pos := -1
+	// Get max weight position
+	for i, value := range in {
+		if i == 0 || value > max {
+			max = value
+			pos = i
+		}
+	}
+	return pos
+}
+
 // Neural Network
 type NeuralNetwork struct {
 	*gonn.NeuralNetwork
@@ -57,6 +72,15 @@ func LoadFromString(nnstrig string) *NeuralNetwork {
 }
 
 // Get answer from neural network (get weight array)
-func (nn *NeuralNetwork) Answer(in []float64) (out []float64) {
+func (nn *NeuralNetwork) Answer(in ...float64) (out []float64) {
 	return nn.Forward(in)
+}
+
+// AnswerToHuman translate nn answer to human answer
+func (nn *NeuralNetwork) AnswerToHuman(out []float64, human []string) string {
+	pos := MaxFloatPosition(out)
+	if pos >= 0 && pos < len(human) {
+		return human[pos]
+	}
+	return ""
 }

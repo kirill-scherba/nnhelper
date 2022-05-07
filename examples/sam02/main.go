@@ -26,6 +26,8 @@ func main() {
 	flag.Parse()
 	log.SetFlags(log.LstdFlags | log.Lmicroseconds)
 
+	humanAnswers := []string{"Night", "Morning", "Day", "Evening"}
+
 	// Create NN if it file does not exists
 	if _, err := os.Stat(SAM02_NN); errors.Is(err, os.ErrNotExist) {
 		log.Println("Create", SAM02_NN, "neural network")
@@ -51,35 +53,10 @@ func main() {
 	// Get answers from NN (weight array)
 	for i := range timeArray {
 		t, _ := nnhelper.TimeToFloat(timeArray[i])
-		out := nn.Answer([]float64{t})
+		out := nn.Answer(t)
+		answer := nn.AnswerToHuman(out, humanAnswers)
 
 		// Print answer
-		fmt.Printf("%s\t%s\t%v\n", timeArray[i], getResult(out), out)
+		fmt.Printf("%s\t%s\t%v\n", timeArray[i], answer, out)
 	}
-}
-
-// getResult return human result from an output float array
-func getResult(output []float64) string {
-	max := -99999.0
-	pos := -1
-	// Get max weight position
-	for i, value := range output {
-		if value > max {
-			max = value
-			pos = i
-		}
-	}
-
-	// Get result depend on position
-	switch pos {
-	case 0:
-		return "Night"
-	case 1:
-		return "Morning"
-	case 2:
-		return "Day"
-	case 3:
-		return "Evening"
-	}
-	return ""
 }

@@ -51,6 +51,8 @@ func main() {
 
 	log.SetFlags(log.LstdFlags | log.Lmicroseconds)
 
+	humanAnswers := []string{"Attack", "Steal", "Run away", "Nothing to do"}
+
 	// Create NN if it file does not exists
 	if _, err := os.Stat(SAM01_NN); errors.Is(err, os.ErrNotExist) {
 		log.Println("Create", SAM01_NN, "neural network")
@@ -69,34 +71,9 @@ func main() {
 	var enemyCount float64 = 1.0
 
 	// Get answer from NN (weight array)
-	out := nn.Answer([]float64{hp, weapon, enemyCount})
+	out := nn.Answer(hp, weapon, enemyCount)
+	answer := nn.AnswerToHuman(out, humanAnswers)
 
 	// Print answer
-	fmt.Println(hp, weapon, enemyCount, getResult(out), out)
-}
-
-// getResult return human result from an output float array
-func getResult(output []float64) string {
-	max := -99999.0
-	pos := -1
-	// Get max weight position
-	for i, value := range output {
-		if value > max {
-			max = value
-			pos = i
-		}
-	}
-
-	// Get result depend on position
-	switch pos {
-	case 0:
-		return "Attack"
-	case 1:
-		return "Steal"
-	case 2:
-		return "Run away"
-	case 3:
-		return "Nothing to do"
-	}
-	return ""
+	fmt.Println(hp, weapon, enemyCount, answer, out)
 }
