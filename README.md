@@ -1,5 +1,6 @@
 # Neural Network Helper 
 [![GoDoc](https://godoc.org/github.com/kirill-scherba/nnhelper?status.svg)](https://godoc.org/github.com/kirill-scherba/nnhelper/)
+[![Go Report Card](https://goreportcard.com/badge/github.com/kirill-scherba/nnhelper)](https://goreportcard.com/report/github.com/kirill-scherba/nnhelper)
 
 Go Language Package with Neural Network helper functions:
 
