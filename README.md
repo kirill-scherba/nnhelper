@@ -9,4 +9,4 @@ Go Language Package with Neural Network helper functions:
 
 Look samples at [exapmples](https://github.com/kirill-scherba/nnhelper/tree/main/examples) folder.
 
-Or you can run example in [The Go Playground](https://go.dev/play/p/18Yru7JJ61n).
+Or you can run example in [The Go Playground](https://go.dev/play/p/7Bvn10D_vNd).
