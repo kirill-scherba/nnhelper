@@ -1,3 +1,21 @@
+// Copyright 2021-2022 Kirill Scherba <kirill@scherba.ru>. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// Example sam03 description:
+//
+// Minus by Minus give Plus
+//
+// Input parameters:
+//
+// - first float parameter
+// - second float parameter
+//
+// Output parameters:
+//
+// - result is Plus
+// - result is Minus
+//
 package main
 
 import (
@@ -17,6 +35,7 @@ const (
 
 func main() {
 
+	// Human answers string array
 	humanAnswers := []string{"Plus", "Minus"}
 
 	// Create NN if it file does not exists
