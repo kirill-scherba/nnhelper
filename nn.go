@@ -35,7 +35,7 @@ func Create(inputCount, hiddenCount, outputCount int, regression bool,
 	gonn.DumpNN(resultNN, nn)
 }
 
-// MaxFloatPosition return positon of maximum weight value in float array,
+// MaxFloatPosition return position of maximum weight value in float array,
 // or -1 if array is empty
 func MaxFloatPosition(in []float64) int {
 	var max float64

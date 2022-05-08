@@ -4,7 +4,7 @@
 
 // Example sam01 description:
 //
-// The task of this neural network is to decide what the game character should 
+// The task of this neural network is to decide what the game character should
 // do, based on 3 parameters:
 //
 // 	- Amount of health (from 1 to 100)
@@ -75,7 +75,7 @@ func main() {
 
 	// Get answer from NN (weight array)
 	out := nn.Answer(hp, weapon, enemyCount)
-	answer,_ := nn.AnswerToHuman(out, humanAnswers)
+	answer, _ := nn.AnswerToHuman(out, humanAnswers)
 
 	// Print answer
 	fmt.Println(hp, weapon, enemyCount, answer, out)
