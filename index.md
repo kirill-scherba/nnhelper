@@ -152,3 +152,10 @@ The package is hosted on Github:
 
 Best regards,  
 Kirill Scherba
+
+<style>
+  .footer {
+    display: none;
+  }
+</style>
+
