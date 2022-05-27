@@ -148,7 +148,7 @@ There are two more examples in the package:
 - _sam01_: An example of a matrix for getting the reaction of a game bot. The input is the amount of health, the presence of weapons, the number of enemies, and at the output we get the answer to the question “what to do”: attack, sneak, run away or do nothing.
 
 The package is hosted on Github:  
-https://github.com/kirill-scherba/nnhelper
+[https://github.com/kirill-scherba/nnhelper](https://github.com/kirill-scherba/nnhelper)
 
 Best regards,  
 Kirill Scherba
