@@ -14,11 +14,9 @@ import (
 	"github.com/fxsjy/gonn/gonn"
 )
 
-// Create Neural Network
+// Create Neural Network from files.
 func Create(inputCount, hiddenCount, outputCount int, regression bool,
 	inpupCsv, targetCsv, resultNN string, print ...bool) {
-
-	nn := gonn.DefaultNetwork(inputCount, hiddenCount, outputCount, regression)
 
 	input, _ := ReadCsv(inpupCsv)
 	if len(print) > 0 && print[0] {
@@ -30,8 +28,15 @@ func Create(inputCount, hiddenCount, outputCount int, regression bool,
 		fmt.Println("Target:", target)
 	}
 
-	nn.Train(input, target, 100000)
+	CreateFromSlice(inputCount, hiddenCount, outputCount, regression, input,
+		target, resultNN)
+}
 
+func CreateFromSlice(inputCount, hiddenCount, outputCount int, regression bool,
+	input, target [][]float64, resultNN string, print ...bool) {
+
+	nn := gonn.DefaultNetwork(inputCount, hiddenCount, outputCount, regression)
+	nn.Train(input, target, 100000)
 	gonn.DumpNN(resultNN, nn)
 }
 
